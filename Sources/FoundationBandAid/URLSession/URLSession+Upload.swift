@@ -26,10 +26,18 @@ public extension URLSession {
     
    /**
      Uploads data to a URL based on the specified URL request and delivers the result asynchronously.
-     - Note: FoundationNetworkingAsync
      */
     func upload(for request: URLRequest, from bodyData: Data, delegate: URLSessionTaskDelegate?) async throws -> (Data, URLResponse) {
-        fatalError()
+        
+        try await withCheckedThrowingContinuation { c in
+
+            let task = uploadTask(with: request, from: bodyData) { data, response, error in
+                if let error { c.resume(throwing: error) }
+                else if let response, let data { c.resume(returning: (data, response)) }
+                else { fatalError() }
+            }
+            task.resume()
+        }
     }    
 }
 
