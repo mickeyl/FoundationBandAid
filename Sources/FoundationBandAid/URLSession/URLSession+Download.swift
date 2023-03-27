@@ -1,8 +1,10 @@
+//
+// FoundationBandAid.
+//
 import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
-
 
 #if !canImport(ObjectiveC)
 
@@ -26,7 +28,7 @@ public extension URLSession {
 
                 if let error { c.resume(throwing: error) }
                 else if let response, let url { c.resume(returning: (url, response)) }
-                else { fatalError() }
+                else { throw Self.InternalError() }
             }
             task.resume()
         }
@@ -43,7 +45,7 @@ public extension URLSession {
 
                 if let error { c.resume(throwing: error) }
                 else if let response, let url { c.resume(returning: (url, response)) }
-                else { fatalError() }
+                else { throw Self.InternalError() }
             }
             task.resume()
         }
