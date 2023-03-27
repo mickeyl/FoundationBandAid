@@ -35,7 +35,7 @@ public extension URLSession {
             let task = dataTask(with: request) { data, response, error in
                 if let error { c.resume(throwing: error) }
                 else if let response, let data { c.resume(returning: (data, response)) }
-                else { fatalError() }
+                else { c.resume(throwing: Self.InternalError()) }
             }
             task.resume()
         }

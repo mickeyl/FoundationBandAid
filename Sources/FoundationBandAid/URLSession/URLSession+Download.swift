@@ -28,7 +28,7 @@ public extension URLSession {
 
                 if let error { c.resume(throwing: error) }
                 else if let response, let url { c.resume(returning: (url, response)) }
-                else { throw Self.InternalError() }
+                else { c.resume(throwing: Self.InternalError()) }
             }
             task.resume()
         }
@@ -45,7 +45,7 @@ public extension URLSession {
 
                 if let error { c.resume(throwing: error) }
                 else if let response, let url { c.resume(returning: (url, response)) }
-                else { throw Self.InternalError() }
+                else { c.resume(throwing: Self.InternalError()) }
             }
             task.resume()
         }
