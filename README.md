@@ -14,6 +14,11 @@ gaps.
 
 ## Functionality
 
-- [x] URLSession Async API
+- [x] URLSession Async API (Part 1, async versions of tasks), see https://github.com/swiftlang/swift-corelibs-foundation/pull/4970
+ - This seems to be in Swift 6.0 (which is problematic on Linux for other things), so we can probably remove it eventually.
+- [ ] URLSession Async API (Part 2, lines API), see https://github.com/swiftlang/swift-corelibs-foundation/pull/3036
+ - Not yet implemented
+- [x] RunLoop.getCFRunLoop API substitute (which is now `internal` on Linux, see https://github.com/swiftlang/swift/issues/75498
+ - Might be reverted in Swift 6.1, let's see.
 
 Hopefully a lot more to come. I'd be grateful for contributions.
